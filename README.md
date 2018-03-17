@@ -1,5 +1,4 @@
 # cl-lz
-### _Brennan Holten <bholten@protonmail.ch>_
 
 This is a simple lazy evaluation library. It is mostly done for educational reasons, because as I am learning Common Lisp...
 
@@ -24,7 +23,7 @@ This library is not for production use. It does not implement any parallel or co
                                       (not (eql 0 (mod n head))))
                                     tail)))))
 
-(defparameter *prime-numbers* (sieve (from 2)))
+(defparameter *prime-numbers* (sieve (from 2))) ; ((2 3 5 7 11 13 17 19 23 29 31 37 41 ...)
 
 ```
 
