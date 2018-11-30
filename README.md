@@ -1,20 +1,23 @@
 # cl-lz
 
-This is a simple lazy evaluation library. It is mostly done for educational reasons, because as I am learning Common Lisp...
-
-1. It is a good self-teaching exercise
-2. Many of the primitives (map vs mapcar vs mapc vs mapcon, etc.) are confusing for beginners, and forcing myself to re-implement them is good
-3. Easy to test against the eager counterparts
-4. It is good practice with the standard Common Lisp packaging, workflow, testing, etc.
+This is a simple lazy evaluation library. It is mostly done for educational reasons, because I found that in learning Common Lisp re-implementing some of these functions and data structures is a good idea.
 
 This library is not for production use. It does not implement any parallel or concurrent primitives (maybe someday). It is basically only for fun.
+
+The main idea of this was lifted from the excellent book, "Land of Lisp", which I highly recommend.
 
 ### Example
 
 ```common-lisp
-(defparameter *integers* (from 1)) ; (1 2 3 4 5 6 ...) 
-(defparameter *first10* (take 10 *integers*)) ; (1 2 3 4 5 6 7 8 9 10)
-(defparameter *evens* (lz-filter #'evenp (from 2))) ; (2 4 6 8 ...)
+;; Contains a few generators for creating lazy lists, e.g.
+(defparameter *integers* (from 1))
+(defparameter *first10* (take 10 *integers*))
+;; (1 2 3 4 5 6 7 8 9 10)
+
+;; They can also be composed:
+(defparameter *evens* (lz-filter #'evenp (from 2)))
+(take 10 *events*)
+;; (2 4 6 8 10 12 14 16 18 20)
 
 (defun sieve (lz)
   (let ((head (lz-car lz))
@@ -23,7 +26,9 @@ This library is not for production use. It does not implement any parallel or co
                                       (not (eql 0 (mod n head))))
                                     tail)))))
 
-(defparameter *prime-numbers* (sieve (from 2))) ; ((2 3 5 7 11 13 17 19 23 29 31 37 41 ...)
+(defparameter *prime-numbers* (sieve (from 2)))
+(take 10 *prime-numbers*)
+;; (2 3 5 7 11 13 17 23 29)
 
 ```
 
